@@ -1,0 +1,56 @@
+package com.zemoso.AuthorMonolithic.controller;
+
+import com.zemoso.AuthorMonolithic.entity.Author;
+import com.zemoso.AuthorMonolithic.entity.Book;
+import com.zemoso.AuthorMonolithic.service.LibraryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/testapi/authors")
+public class LibraryController {
+
+    private final LibraryService libraryService;
+
+    @Autowired
+    public LibraryController(LibraryService libraryService) {
+        this.libraryService = libraryService;
+    }
+
+    @GetMapping
+    public List<Author> getAllAuthors() {
+        return libraryService.getAllAuthors();
+    }
+
+    @GetMapping("/{id}")
+    public Author getAuthorById(@PathVariable Long id) {
+        return libraryService.getAuthorById(id);
+    }
+
+    @PostMapping
+    public Author createAuthor(@RequestBody Author author) {
+        return libraryService.createAuthor(author);
+    }
+
+    @PutMapping("/{id}")
+    public Author updateAuthor(@PathVariable Long id, @RequestBody Author author) {
+        return libraryService.updateAuthor(id, author);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteAuthor(@PathVariable Long id) {
+        libraryService.deleteAuthor(id);
+    }
+
+    @GetMapping("/{id}/books")
+    public List<Book> getBooksByAuthor(@PathVariable Long id) {
+        return libraryService.getBooksByAuthor(id);
+    }
+
+    @PostMapping("/{id}/books")
+    public Book addBookToAuthor(@PathVariable Long id, @RequestBody Book book) {
+        return libraryService.addBookToAuthor(id, book);
+    }
+}
