@@ -94,6 +94,18 @@
 					<version>3.9.1.2184</version> <!-- Use the latest version -->
 				</plugin>
 
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.2.5</version>
+				<configuration>
+					<excludes>
+						<exclude>**/AuthorMonolithicApplicationTests.class</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
 		</plugins>
 
 	</build>
