@@ -74,6 +74,8 @@
 				<configuration>
 					<excludes>
 						<exclude>**/AuthorMonolithicApplication.class</exclude>
+						<exclude>**/AuthorMonolithicApplicationTests.class</exclude>
+
 					</excludes>
 				</configuration>
 				<executions>
