@@ -90,15 +90,15 @@
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
-					<outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>
-					<dataFile>${project.build.directory}/jacoco.exec</dataFile>
-					<!-- The following is optional if you want to generate reports in multiple formats -->
-<!--					<reportFormats>-->
-<!--						<reportFormat>xml</reportFormat>-->
-<!--						<reportFormat>html</reportFormat>-->
-<!--					</reportFormats>-->
-				</configuration>
+<!--				<configuration>-->
+<!--					<outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>-->
+<!--					<dataFile>${project.build.directory}/jacoco.exec</dataFile>-->
+<!--					&lt;!&ndash; The following is optional if you want to generate reports in multiple formats &ndash;&gt;-->
+<!--&lt;!&ndash;					<reportFormats>&ndash;&gt;-->
+<!--&lt;!&ndash;						<reportFormat>xml</reportFormat>&ndash;&gt;-->
+<!--&lt;!&ndash;						<reportFormat>html</reportFormat>&ndash;&gt;-->
+<!--&lt;!&ndash;					</reportFormats>&ndash;&gt;-->
+<!--				</configuration>-->
 			</plugin>
 
 
