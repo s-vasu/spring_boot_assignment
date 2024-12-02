@@ -38,3 +38,6 @@ jobs:
 
       - name: ls
         run: ls
+
+      - name: report
+        run: cat target/site/jacoco/jacoco.xml
