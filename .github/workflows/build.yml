@@ -40,10 +40,10 @@ jobs:
 #        run: mvn jacoco:report
 
       - name: list directory
-        run: ls -a
+        run: cd target
 
       - name: change directory
-        run: cd target/site/jacoco
+        run: cd site/jacoco
 
       - name: display report
         run: cat jacoco.xml  # Display the contents of the XML report
@@ -54,4 +54,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=s-vasu_spring_boot_assignment
-#        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=s-vasu_spring_boot_assignment
