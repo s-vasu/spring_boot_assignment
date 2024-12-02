@@ -39,6 +39,9 @@ jobs:
 #      - name: Generate JaCoCo Report
 #        run: mvn jacoco:report
 
+      - name: list directory
+        run: ls -a
+
       - name: change directory
         run: cd target/site/jacoco
 
