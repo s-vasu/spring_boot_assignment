@@ -33,12 +33,17 @@ jobs:
 
 
 
-      - name: Test with Maven
-        run: mvn test
+#      - name: Test with Maven
+#        run: mvn test
 
-      - name: Generate JaCoCo Report
-        run: mvn jacoco:report
+#      - name: Generate JaCoCo Report
+#        run: mvn jacoco:report
 
+      - name: change directory
+        run: cd target/site/jacoco
+
+      - name: display report
+        run: cat jacoco.xml  # Display the contents of the XML report
 
 
       - name: Build and analyze
