@@ -1,4 +1,5 @@
-name: SonarQube Cloud
+name: SonarQube Coverage
+
 on:
   push:
     branches:
@@ -8,30 +9,18 @@ on:
 
 jobs:
   build:
-    name: Build and Analyze
     runs-on: ubuntu-latest
     steps:
-      # Checkout the code
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Ensure full clone for better analysis
+          fetch-depth: 0
 
-      # Set up JDK
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: 17
-          distribution: 'zulu'  # Alternative distributions are available
+          distribution: 'zulu'
 
-      # Cache SonarQube Cloud packages
-      - name: Cache SonarQube Cloud packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-
-      # Cache Maven packages
       - name: Cache Maven packages
         uses: actions/cache@v4
         with:
@@ -39,45 +28,17 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      # Build the project with Maven
-      - name: Build the Project
-        run: mvn clean verify -DskipTests=false  # Ensures tests are run and reports are generated
+      - name: Build and Test
+        run: mvn clean test -DskipTests=false
 
-      # List project root directory contents
-      - name: List Project Root Directory
-        run: ls -la
+      - name: Generate Coverage Report
+        run: mvn jacoco:report
 
-      # Check if 'target' directory exists
-      - name: Check Target Directory
-        run: |
-          if [ -d "target" ]; then
-            echo "Target directory exists."
-          else
-            echo "Target directory does not exist. Build may have failed."
-            exit 1
-          fi
-
-      # List 'target' directory contents
-      - name: List Target Directory Contents
-        run: ls -la target
-
-      # Check if JaCoCo report exists
-      - name: Check JaCoCo Report
-        run: |
-          if [ -f "target/site/jacoco/jacoco.xml" ]; then
-            echo "JaCoCo report found."
-          else
-            echo "JaCoCo report not found. Ensure the Maven JaCoCo plugin is configured correctly."
-            exit 1
-          fi
-
-      # Display JaCoCo Report
-      - name: Display JaCoCo Report
+      - name: Display Coverage Report
         run: cat target/site/jacoco/jacoco.xml
 
-      # Run SonarQube analysis
-      - name: Build and Analyze with SonarQube
+      - name: Run SonarQube Analysis
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Required for PR information
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=s-vasu_spring_boot_assignment
+        run: mvn sonar:sonar -Dsonar.projectKey=s-vasu_spring_boot_assignment
