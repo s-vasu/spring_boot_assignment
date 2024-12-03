@@ -14,7 +14,7 @@ public class AuthorMonolithicApplicationTests {
 
 
 	@Test
-	void contextLoads() {
+	void  contextLoads() {
 	}
 
 }

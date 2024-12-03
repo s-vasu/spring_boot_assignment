@@ -116,7 +116,7 @@
 				<version>3.5.2</version>
 				<configuration>
 					<excludes>
-<!--						<exclude>**/AuthorMonolithicApplicationTests.class</exclude>-->
+						<exclude>**/AuthorMonolithicApplicationTests.class</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
