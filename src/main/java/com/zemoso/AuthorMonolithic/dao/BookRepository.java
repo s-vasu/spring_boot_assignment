@@ -1,6 +1,6 @@
-package com.zemoso.author_monolithic.dao;
+package com.zemoso.AuthorMonolithic.dao;
 
-import com.zemoso.author_monolithic.entity.Book;
+import com.zemoso.AuthorMonolithic.entity.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

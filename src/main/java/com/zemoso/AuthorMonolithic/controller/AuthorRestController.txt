@@ -1,7 +1,7 @@
-package com.zemoso.author_monolithic.controller;
+package com.zemoso.AuthorMonolithic.controller;
 
-import com.zemoso.author_monolithic.dao.AuthorRepository;
-import com.zemoso.author_monolithic.entity.Author;
+import com.zemoso.AuthorMonolithic.dao.AuthorRepository;
+import com.zemoso.AuthorMonolithic.entity.Author;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

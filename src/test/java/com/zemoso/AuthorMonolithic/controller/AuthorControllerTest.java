@@ -1,9 +1,9 @@
-package com.zemoso.author_monolithic.controller;
+package com.zemoso.AuthorMonolithic.controller;
 
-import com.zemoso.author_monolithic.dao.AuthorRepository;
-import com.zemoso.author_monolithic.entity.Author;
-import com.zemoso.author_monolithic.entity.Book;
-import com.zemoso.author_monolithic.service.BookService;
+import com.zemoso.AuthorMonolithic.dao.AuthorRepository;
+import com.zemoso.AuthorMonolithic.entity.Author;
+import com.zemoso.AuthorMonolithic.entity.Book;
+import com.zemoso.AuthorMonolithic.service.BookService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

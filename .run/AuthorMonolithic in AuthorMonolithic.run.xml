@@ -3,12 +3,12 @@
     <module name="AuthorMonolithic" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="com.zemoso.author_monolithic.AuthorMonolithicApplication" />
+        <option name="PATTERN" value="com.zemoso.AuthorMonolithic.AuthorMonolithicApplication" />
         <option name="ENABLED" value="true" />
         <option name="INCLUDE" value="false" />
       </pattern>
       <pattern>
-        <option name="PATTERN" value="com.zemoso.author_monolithic.AuthorMonolithicApplicationTests" />
+        <option name="PATTERN" value="com.zemoso.AuthorMonolithic.AuthorMonolithicApplicationTests" />
         <option name="ENABLED" value="false" />
         <option name="INCLUDE" value="false" />
       </pattern>

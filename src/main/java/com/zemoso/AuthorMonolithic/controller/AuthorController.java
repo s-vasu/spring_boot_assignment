@@ -1,9 +1,9 @@
-package com.zemoso.author_monolithic.controller;
+package com.zemoso.AuthorMonolithic.controller;
 
-import com.zemoso.author_monolithic.dao.AuthorRepository;
-import com.zemoso.author_monolithic.entity.Author;
-import com.zemoso.author_monolithic.entity.Book;
-import com.zemoso.author_monolithic.service.BookService;
+import com.zemoso.AuthorMonolithic.dao.AuthorRepository;
+import com.zemoso.AuthorMonolithic.entity.Author;
+import com.zemoso.AuthorMonolithic.entity.Book;
+import com.zemoso.AuthorMonolithic.service.BookService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,17 +17,14 @@ import org.slf4j.LoggerFactory;
 @Controller
 @RequestMapping("/authors")
 public class AuthorController {
+
     private static final Logger logger = LoggerFactory.getLogger(AuthorController.class);
 
+    @Autowired
     private AuthorRepository authorRepository;
 
-    private BookService bookService;
-
     @Autowired
-    public AuthorController(AuthorRepository authorRepository, BookService bookService) {
-        this.authorRepository = authorRepository;
-        this.bookService = bookService;
-    }
+    private BookService bookService;
 
     @GetMapping
     public String listAuthors(Model model) {
@@ -70,6 +67,8 @@ public class AuthorController {
 
     @GetMapping("/{authorId}/books")
     public String getBooksByAuthor(@PathVariable Long authorId, Model theModel) {
+        // Log to confirm the method is being reached
+        List<Book> books = bookService.getBooksByAuthorId(authorId);
         Author theAuthor = authorRepository.findById(authorId) .orElseThrow(() -> new IllegalArgumentException("Author not found"));
         theModel.addAttribute("author",theAuthor);
         theModel.addAttribute("books", theAuthor.getBooks());
@@ -88,7 +87,7 @@ public class AuthorController {
 
     @PostConstruct
     public void init() {
-        logger.info("AuthorController initialized");
+        System.out.println("AuthorController initialized");
     }
 
 }
