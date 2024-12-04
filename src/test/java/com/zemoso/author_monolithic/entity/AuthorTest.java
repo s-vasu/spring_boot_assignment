@@ -1,4 +1,4 @@
-package com.zemoso.AuthorMonolithic.entity;
+package com.zemoso.author_monolithic.entity;
 
 import org.junit.jupiter.api.Test;
 

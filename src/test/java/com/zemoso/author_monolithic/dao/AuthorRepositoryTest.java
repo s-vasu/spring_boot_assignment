@@ -1,6 +1,6 @@
-package com.zemoso.AuthorMonolithic.dao;
+package com.zemoso.author_monolithic.dao;
 
-import com.zemoso.AuthorMonolithic.entity.Author;
+import com.zemoso.author_monolithic.entity.Author;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
