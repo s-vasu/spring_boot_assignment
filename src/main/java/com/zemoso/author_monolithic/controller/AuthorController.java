@@ -20,11 +20,19 @@ public class AuthorController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthorController.class);
 
-    @Autowired
     private AuthorRepository authorRepository;
 
-    @Autowired
     private BookService bookService;
+
+    private Author author;
+    private String redirectAuthor = "redirect:/authors";
+    private String notFoundMsg = "Author not found";
+
+    @Autowired
+    public AuthorController(AuthorRepository authorRepository, BookService bookService) {
+        this.authorRepository = authorRepository;
+        this.bookService = bookService;
+    }
 
     @GetMapping
     public String listAuthors(Model model) {
@@ -41,42 +49,42 @@ public class AuthorController {
     @PostMapping("/create")
     public String createAuthor(@ModelAttribute Author author) {
         authorRepository.save(author);
-        return "redirect:/authors";
+        return redirectAuthor;
     }
 
     @GetMapping("/edit/{id}")
     public String editAuthorForm(@PathVariable Long id, Model model) {
-        Author author = authorRepository.findById(id).orElseThrow(() -> new RuntimeException("Author not found"));
+        author = authorRepository.findById(id).orElseThrow(() -> new RuntimeException(notFoundMsg));
         model.addAttribute("author", author);
         return "author-edit";
     }
 
     @PostMapping("/edit/{id}")
     public String editAuthor(@PathVariable Long id, @ModelAttribute Author author) {
-        Author existingAuthor = authorRepository.findById(id).orElseThrow(() -> new RuntimeException("Author not found"));
+        Author existingAuthor = authorRepository.findById(id).orElseThrow(() -> new RuntimeException(notFoundMsg));
         existingAuthor.setName(author.getName());
         authorRepository.save(existingAuthor);
-        return "redirect:/authors";
+        return redirectAuthor;
     }
 
     @GetMapping("/delete/{id}")
     public String deleteAuthor(@PathVariable Long id) {
         authorRepository.deleteById(id);
-        return "redirect:/authors";
+        return redirectAuthor;
     }
 
     @GetMapping("/{authorId}/books")
     public String getBooksByAuthor(@PathVariable Long authorId, Model theModel) {
         // Log to confirm the method is being reached
-        Author theAuthor = authorRepository.findById(authorId) .orElseThrow(() -> new IllegalArgumentException("Author not found"));
-        theModel.addAttribute("author",theAuthor);
-        theModel.addAttribute("books", theAuthor.getBooks());
+        author = authorRepository.findById(authorId) .orElseThrow(() -> new IllegalArgumentException(notFoundMsg));
+        theModel.addAttribute("author",author);
+        theModel.addAttribute("books", author.getBooks());
         return "books";
     }
 
     @PostMapping("/{authorId}/addBook")
     public String addBook(@PathVariable Long authorId, @RequestParam String title) {
-        Author author = authorRepository.findById(authorId).orElseThrow();
+        author = authorRepository.findById(authorId).orElseThrow();
         Book book = new Book();
         book.setTitle(title);
         book.setAuthor(author);
@@ -86,7 +94,7 @@ public class AuthorController {
 
     @PostConstruct
     public void init() {
-        System.out.println("AuthorController initialized");
+        logger.info("AuthorController initialized");
     }
 
 }
