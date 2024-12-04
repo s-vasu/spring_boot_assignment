@@ -68,7 +68,6 @@ public class AuthorController {
     @GetMapping("/{authorId}/books")
     public String getBooksByAuthor(@PathVariable Long authorId, Model theModel) {
         // Log to confirm the method is being reached
-        List<Book> books = bookService.getBooksByAuthorId(authorId);
         Author theAuthor = authorRepository.findById(authorId) .orElseThrow(() -> new IllegalArgumentException("Author not found"));
         theModel.addAttribute("author",theAuthor);
         theModel.addAttribute("books", theAuthor.getBooks());
