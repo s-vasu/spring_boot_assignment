@@ -1,4 +1,4 @@
-package com.zemoso.AuthorMonolithic;
+package com.zemoso.author_monolithic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
