@@ -10,8 +10,11 @@ import java.util.List;
 @Service
 public class BookService {
 
-    @Autowired
     private BookRepository bookRepository;
+
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     public List<Book> getBooksByAuthorId(Long authorId) {
         return bookRepository.findByAuthorId(authorId);
