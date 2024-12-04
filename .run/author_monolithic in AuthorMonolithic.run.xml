@@ -7,11 +7,16 @@
         <option name="ENABLED" value="true" />
         <option name="INCLUDE" value="false" />
       </pattern>
+      <pattern>
+        <option name="PATTERN" value="com.zemoso.author_monolithic.AuthorMonolithicApplication" />
+        <option name="ENABLED" value="true" />
+        <option name="INCLUDE" value="false" />
+      </pattern>
     </extension>
     <option name="MAIN_CLASS_NAME" value="" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="directory" />
-    <dir value="$PROJECT_DIR$/src/test/java/com/zemoso/author_monolithic" />
+    <dir value="$PROJECT_DIR$/src/main/java/com/zemoso/author_monolithic" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
