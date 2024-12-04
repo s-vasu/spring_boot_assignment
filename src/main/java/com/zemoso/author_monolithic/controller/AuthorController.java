@@ -19,14 +19,17 @@ import org.slf4j.LoggerFactory;
 @Controller
 @RequestMapping("/authors")
 public class AuthorController {
-
     private static final Logger logger = LoggerFactory.getLogger(AuthorController.class);
 
-    @Autowired
     private AuthorRepository authorRepository;
 
-    @Autowired
     private BookService bookService;
+
+    @Autowired
+    public AuthorController(AuthorRepository authorRepository, BookService bookService) {
+        this.authorRepository = authorRepository;
+        this.bookService = bookService;
+    }
 
     @GetMapping
     public String listAuthors(Model model) {
@@ -69,8 +72,6 @@ public class AuthorController {
 
     @GetMapping("/{authorId}/books")
     public String getBooksByAuthor(@PathVariable Long authorId, Model theModel) {
-        // Log to confirm the method is being reached
-        List<Book> books = bookService.getBooksByAuthorId(authorId);
         Author theAuthor = authorRepository.findById(authorId) .orElseThrow(() -> new IllegalArgumentException("Author not found"));
         theModel.addAttribute("author",theAuthor);
         theModel.addAttribute("books", theAuthor.getBooks());
@@ -89,7 +90,7 @@ public class AuthorController {
 
     @PostConstruct
     public void init() {
-        System.out.println("AuthorController initialized");
+        logger.info("AuthorController initialized");
     }
 
 }

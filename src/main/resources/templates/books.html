@@ -31,7 +31,7 @@
         <form th:action="@{/authors/{authorId}/addBook(authorId=${author.id})}" method="post">
             <div class="mb-3">
                 <label for="title" class="form-label">Add New Book</label>
-                <input type="text" id="title" name="title" class="form-control" placeholder="Enter book title" required>
+                <input type="text" id="title" name="title" class="form-control" placeholder="Enter book title" pattern="[A-Za-z\s]*"  title="Only alphabets and spaces are allowed." required>
 
             </div>
             <button type="submit" class="btn btn-primary">Add Book</button>

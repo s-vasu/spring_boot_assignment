@@ -7,10 +7,11 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles("test")
-public class AuthorMonolithicApplicationTests {
+class AuthorMonolithicApplicationTests {
 
 	@Test
 	void  contextLoads() {
+//		need to implement methods
 	}
 
 }
