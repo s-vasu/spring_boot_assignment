@@ -25,7 +25,8 @@ public class AuthorController {
     private BookService bookService;
 
     private Author author;
-    private String redirect_author = "redirect:/authors";
+    private String redirectAuthor = "redirect:/authors";
+    private String notFoundMsg = "Author not found";
 
     @Autowired
     public AuthorController(AuthorRepository authorRepository, BookService bookService) {
@@ -48,34 +49,34 @@ public class AuthorController {
     @PostMapping("/create")
     public String createAuthor(@ModelAttribute Author author) {
         authorRepository.save(author);
-        return redirect_author;
+        return redirectAuthor;
     }
 
     @GetMapping("/edit/{id}")
     public String editAuthorForm(@PathVariable Long id, Model model) {
-        author = authorRepository.findById(id).orElseThrow(() -> new RuntimeException("Author not found"));
+        author = authorRepository.findById(id).orElseThrow(() -> new RuntimeException(notFoundMsg));
         model.addAttribute("author", author);
         return "author-edit";
     }
 
     @PostMapping("/edit/{id}")
     public String editAuthor(@PathVariable Long id, @ModelAttribute Author author) {
-        Author existingAuthor = authorRepository.findById(id).orElseThrow(() -> new RuntimeException("Author not found"));
+        Author existingAuthor = authorRepository.findById(id).orElseThrow(() -> new RuntimeException(notFoundMsg));
         existingAuthor.setName(author.getName());
         authorRepository.save(existingAuthor);
-        return redirect_author;
+        return redirectAuthor;
     }
 
     @GetMapping("/delete/{id}")
     public String deleteAuthor(@PathVariable Long id) {
         authorRepository.deleteById(id);
-        return redirect_author;
+        return redirectAuthor;
     }
 
     @GetMapping("/{authorId}/books")
     public String getBooksByAuthor(@PathVariable Long authorId, Model theModel) {
         // Log to confirm the method is being reached
-        author = authorRepository.findById(authorId) .orElseThrow(() -> new IllegalArgumentException("Author not found"));
+        author = authorRepository.findById(authorId) .orElseThrow(() -> new IllegalArgumentException(notFoundMsg));
         theModel.addAttribute("author",author);
         theModel.addAttribute("books", author.getBooks());
         return "books";
