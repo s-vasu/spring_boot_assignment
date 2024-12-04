@@ -1,7 +1,7 @@
-package com.zemoso.AuthorMonolithic.service;
+package com.zemoso.author_monolithic.service;
 
-import com.zemoso.AuthorMonolithic.entity.Book;
-import com.zemoso.AuthorMonolithic.dao.BookRepository;
+import com.zemoso.author_monolithic.entity.Book;
+import com.zemoso.author_monolithic.dao.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +10,12 @@ import java.util.List;
 @Service
 public class BookService {
 
-    @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    public BookService(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     public List<Book> getBooksByAuthorId(Long authorId) {
         return bookRepository.findByAuthorId(authorId);

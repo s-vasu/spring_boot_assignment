@@ -117,6 +117,7 @@
 				<configuration>
 					<excludes>
 						<exclude>**/AuthorMonolithicApplicationTests.class</exclude>
+						<exclude>com/zemoso/author_monolithic/AuthorMonolithicApplication*</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
