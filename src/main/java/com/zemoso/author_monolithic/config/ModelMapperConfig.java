@@ -1,5 +1,4 @@
-package com.zemoso.author_monolithic.mapper;
-
+package com.zemoso.author_monolithic.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

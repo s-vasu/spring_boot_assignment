@@ -10,7 +10,6 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 public class BookDTO {
     private Long id;
-//    @NotEmpty(message = "Title is required")
     private String title;
     private AuthorDTO author; // Reference to AuthorDTO instead of direct Author entity
 

@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 public class AuthorDTO {
     private Long id;
-//    @NotEmpty(message = "Name is required")
     private String name;
     @JsonIgnore
     private List<BookDTO> books; // This should be a DTO list to avoid direct entity use
