@@ -130,6 +130,9 @@
 				<configuration>
 					<excludes>
 						<exclude>**/AuthorMonolithicApplicationTests.class</exclude>
+						<exclude>com/zemoso/author_monolithic/exceptions/*</exclude>
+						<exclude>com/zemoso/author_monolithic/constants/*</exclude>
+						<exclude>com/zemoso/author_monolithic/config/*</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
