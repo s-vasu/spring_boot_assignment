@@ -1,6 +1,7 @@
 package com.zemoso.author_monolithic.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "books")
@@ -12,9 +13,10 @@ public class Book {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", nullable = false)
-    private Author author;
+    @JsonProperty("author")
+    private Author author; // This should be of type Author entity
 
     public Book() {
     }
@@ -31,8 +33,6 @@ public class Book {
     }
 
     // Getters and setters
-
-
     public Long getId() {
         return id;
     }

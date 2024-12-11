@@ -1,27 +1,20 @@
 package com.zemoso.author_monolithic.service;
 
-import com.zemoso.author_monolithic.entity.Book;
-import com.zemoso.author_monolithic.dao.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.zemoso.author_monolithic.dto.BookDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Optional;
 
-@Service
-public class BookService {
+public interface BookService {
+    List<BookDTO> getBooksByAuthorId(Long authorId);
 
-    private BookRepository bookRepository;
+    BookDTO save(BookDTO bookDTO);
 
-    @Autowired
-    public BookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
+    void deleteById(Long id);
 
-    public List<Book> getBooksByAuthorId(Long authorId) {
-        return bookRepository.findByAuthorId(authorId);
-    }
+    Page<BookDTO> getBooks(Pageable pageable);
 
-    public void save(Book book) {
-        bookRepository.save(book);
-    }
+    Optional<BookDTO> getBooksById(Long id);
 }
