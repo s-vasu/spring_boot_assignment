@@ -1,9 +1,13 @@
 package com.zemoso.author_monolithic.controller;
 
 import com.zemoso.author_monolithic.dao.AuthorRepository;
+import com.zemoso.author_monolithic.dto.AuthorDTO;
+import com.zemoso.author_monolithic.dto.BookDTO;
 import com.zemoso.author_monolithic.entity.Author;
 import com.zemoso.author_monolithic.entity.Book;
-import com.zemoso.author_monolithic.service.BookService;
+import com.zemoso.author_monolithic.mapper.AuthorMapper;
+import com.zemoso.author_monolithic.mapper.BookMapper;
+import com.zemoso.author_monolithic.service.BookServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -24,7 +28,7 @@ class AuthorControllerTest {
     private AuthorRepository authorRepository;
 
     @Mock
-    private BookService bookService;
+    private BookServiceImpl bookService;
 
     @Mock
     private Model model;
@@ -58,13 +62,13 @@ class AuthorControllerTest {
 
     @Test
     void testCreateAuthor() {
-        Author author = new Author();
+        AuthorDTO author = new AuthorDTO();
         author.setName("New Author");
 
         String viewName = authorController.createAuthor(author);
 
         assertEquals("redirect:/authors", viewName);
-        verify(authorRepository).save(author);
+        verify(authorRepository).save(AuthorMapper.toEntity(author));
     }
 
     @Test
@@ -83,7 +87,7 @@ class AuthorControllerTest {
         Author existingAuthor = new Author(1L, "Existing Author");
         when(authorRepository.findById(1L)).thenReturn(Optional.of(existingAuthor));
 
-        Author updatedAuthor = new Author();
+        AuthorDTO updatedAuthor = new AuthorDTO();
         updatedAuthor.setName("Updated Author");
 
         String viewName = authorController.editAuthor(1L, updatedAuthor);
@@ -103,9 +107,9 @@ class AuthorControllerTest {
 
     @Test
     void testGetBooksByAuthor() {
-        Author author = new Author(1L, "Author1");
-        List<Book> books = Arrays.asList(new Book(1L, "Book1", author), new Book(2L, "Book2", author));
-        author.setBooks(books);
+        AuthorDTO author = new AuthorDTO(1L, "Author1");
+        List<Book> books = Arrays.asList(new Book(1L, "Book1", AuthorMapper.toEntity(author)), new Book(2L, "Book2", author));
+        author.setBooks(BookMapper.toDTO(books));
 
         when(authorRepository.findById(1L)).thenReturn(Optional.of(author));
         when(bookService.getBooksByAuthorId(1L)).thenReturn(books);
@@ -119,13 +123,13 @@ class AuthorControllerTest {
 
     @Test
     void testAddBook() {
-        Author author = new Author(1L, "Author1");
+        AuthorDTO author = new AuthorDTO(1L, "Author1");
         when(authorRepository.findById(1L)).thenReturn(Optional.of(author));
 
         String viewName = authorController.addBook(1L, "New Book");
 
         assertEquals("redirect:/authors/1/books", viewName);
-        verify(bookService).save(any(Book.class));
+        verify(bookService).save(any(BookDTO.class));
     }
 
     @Test
